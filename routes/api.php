@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FetchApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::group(['middleware' => ['auth:api']],function(){
+    route::get('fetch-api-one', [FetchApiController::class, 'show']);
+});
+
+route::post('fetch-api-search', [FetchApiController::class, 'search']);
